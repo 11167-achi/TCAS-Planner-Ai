@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCAS Genius Planner</title>
+    
+    <!-- CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Babel: เพื่อให้เบราว์เซอร์รัน JSX/TSX บน GitHub Pages ได้โดยตรง -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
         body { font-family: 'Noto Sans Thai', sans-serif; }
         h1, h2, h3, h4, h5, h6, button, input { font-family: 'Prompt', sans-serif; }
@@ -15,24 +21,29 @@
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.4s ease-out forwards;
-        }
+        .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
-<script type="importmap">
+
+    <!-- Shim สำหรับ process.env: ป้องกัน Error process is not defined -->
+    <script>
+      window.process = { env: { API_KEY: "" } };
+    </script>
+
+    <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "@google/genai": "https://esm.sh/@google/genai@1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.474.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
@@ -40,8 +51,9 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
-    <!-- เพิ่มการเรียกใช้งานไฟล์ index.tsx เพื่อเริ่มต้นระบบ -->
-    <script type="module" src="./index.tsx"></script>
+    
+    <!-- แก้ไข src เป็น "index.tsx" (ไม่มี ./) และใช้ type="text/babel" พร้อม data-type="module" เพื่อเลี่ยง MIME type error -->
+    <script type="text/babel" data-type="module" data-presets="typescript,react" src="index.tsx"></script>
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>

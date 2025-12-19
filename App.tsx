@@ -12,9 +12,9 @@ import {
   Flame, Book, MoveDiagonal2, Mail, GraduationCap as GraduateIcon,
   Award, Presentation, Globe, Plus, ChevronDown, ChevronUp
 } from 'lucide-react';
-import { EXTENDED_FACULTIES, POPULAR_TAGS, THAI_UNIVERSITIES, TRANSLATIONS } from './constants';
-import { searchUniversities, getUniversityDetails, chatWithAiStream } from './services/gemini';
-import { UniversityData, ChatMessage, RecommendedTutor, Tutor } from './types';
+import { EXTENDED_FACULTIES, POPULAR_TAGS, THAI_UNIVERSITIES, TRANSLATIONS } from './constants.ts';
+import { searchUniversities, getUniversityDetails, chatWithAiStream } from './services/gemini.ts';
+import { UniversityData, ChatMessage, RecommendedTutor, Tutor } from './types.ts';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<'th' | 'en'>('th');
@@ -170,7 +170,6 @@ const App: React.FC = () => {
     setChatInput('');
     setIsChatSending(true);
     
-    // Add an initial empty AI message to stream into
     setChat(prev => [...prev, { role: 'ai', text: '' }]);
 
     try {
